@@ -4,13 +4,12 @@ import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../providers/AuthProvider";
 
 const Login = () => {
+  const { signInUser, googleSignIn } = useContext(AuthContext);
+  const [errorMessage, setErrorMessage] = useState("");
+  const navigate = useNavigate();
 
-    const {signInUser} = useContext(AuthContext)
-    const [errorMessage, setErrorMessage] = useState("");
-    const navigate = useNavigate();
-
-// Handle sign in function
-const handleSignIn = (event) => {
+  // Handle sign in function
+  const handleSignIn = (event) => {
     event.preventDefault();
     const form = event.target;
     const email = form.email.value;
@@ -21,14 +20,24 @@ const handleSignIn = (event) => {
     signInUser(email, password)
       .then((result) => {
         const loggedUser = result.user;
-        console.log(loggedUser)
+        console.log(loggedUser);
         form.reset();
-        navigate("/")
-
+        navigate("/");
       })
       .catch((error) => setErrorMessage(error.message));
   };
 
+  // Handle Google sign in
+  const handleGoogleSignIn = () =>
+    googleSignIn()
+      .then((result) => {
+        const user = result.user;
+        console.log(user)
+        navigate("/");
+      })
+      .catch((err) => {
+        console.error(err);
+      });
 
   return (
     <>
@@ -93,7 +102,9 @@ const handleSignIn = (event) => {
           {/* Signin with google & Github Section */}
           <div className="divider px-7">OR</div>
           <div className="px-7 my-5">
-            <button className="btn btn-outline text-[#9336B4] hover:bg-[#b842e3] hover:border-none w-full mb-3">
+            <button 
+            onClick={handleGoogleSignIn}
+            className="btn btn-outline text-[#9336B4] hover:bg-[#b842e3] hover:border-none w-full mb-3">
               <FaGoogle className="me-3"></FaGoogle> continue with Google
             </button>
           </div>

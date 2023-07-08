@@ -1,10 +1,23 @@
+import { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
+import { AuthContext } from "../../../providers/AuthProvider";
 
 const Header = () => {
+
+    const {user,logOut} =useContext(AuthContext)
+    // console.log(user.photoURL)
+
+    // User logout function
+    const handleLogout = ()=>{
+      logOut()
+      .then()
+      .catch((error) => console.error(error));
+    }
+
   return (
     <>
       <div className=" bg-[#9336B4] text-white">
-        <div className="navbar w-11/12 md:10/12 mx-auto">
+        <div className="navbar md:w-10/12 mx-auto">
           <div className="navbar-start">
             <div className="dropdown">
               <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -25,17 +38,17 @@ const Header = () => {
               </label>
               <ul
                 tabIndex={0}
-                className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+                className="menu menu-sm dropdown-content mt-3 z-[1] md:p-2 shadow bg-[#9336B4] rounded-box w-52"
               >
                 <li>
-                  <a>Item 1</a>
+                  <Link to={"/"}>Home</Link>
                 </li>
                 <li>
-                  <a>Item 3</a>
+                <Link to={"/contact"} >Contact</Link>
                 </li>
               </ul>
             </div>
-            <Link className="text-xl font-bold inline-flex items-center uppercase "><span><img className="w-10 h-10" src="/public/watch.png" alt="logo" /></span> Retail Watch</Link>
+            <Link className=" text-xs md:text-xl font-bold inline-flex items-center uppercase "><span><img className="w-10 h-10" src="/public/watch.png" alt="logo" /></span> Retail Watch</Link>
           </div>
           <div className="navbar-center hidden lg:flex">
             <ul className="flex items-center space-x-5 uppercase font-semibold">
@@ -44,8 +57,15 @@ const Header = () => {
               <NavLink to={"/contact"}>Contact</NavLink>
             </ul>
           </div>
-          <div className="navbar-end">
-            <Link to={"/login"} className="btn text-[#9336B4]">Login</Link>
+          <div className="navbar-end space-x-3">
+            {
+              user? <><Link onClick={handleLogout} className="btn text-[#9336B4]">Logout</Link></>:<><Link to={"/login"} className="btn text-[#9336B4]">Login</Link></>
+            }
+            {
+              user && <>
+              <img className="rounded-full h-12 w-12 ring ring-white ring-offset-2 cursor-pointer" src={user?.photoURL} alt="user image" />
+              </>
+            }
           </div>
         </div>
       </div>

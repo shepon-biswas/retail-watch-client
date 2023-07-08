@@ -1,7 +1,35 @@
+import { useContext, useState } from "react";
 import { FaGoogle } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../providers/AuthProvider";
 
 const Login = () => {
+
+    const {signInUser} = useContext(AuthContext)
+    const [errorMessage, setErrorMessage] = useState("");
+    const navigate = useNavigate();
+
+// Handle sign in function
+const handleSignIn = (event) => {
+    event.preventDefault();
+    const form = event.target;
+    const email = form.email.value;
+    const password = form.password.value;
+    console.log(email, password);
+
+    // sign in user using registered email and password
+    signInUser(email, password)
+      .then((result) => {
+        const loggedUser = result.user;
+        console.log(loggedUser)
+        form.reset();
+        navigate("/")
+
+      })
+      .catch((error) => setErrorMessage(error.message));
+  };
+
+
   return (
     <>
       <div className=" w-10/12 mx-auto grid grid-cols-2 items-center px-5 my-5">
@@ -22,7 +50,7 @@ const Login = () => {
             </h4>
             <hr />
           </div>
-          <form className="card-body">
+          <form onSubmit={handleSignIn} className="card-body">
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Your Email</span>
@@ -47,6 +75,7 @@ const Login = () => {
                 required
               />
             </div>
+            <p className="text-red-500 font-semibold">{errorMessage}</p>
             <div className="form-control mt-6">
               <button className="btn bg-[#9336B4] border-none text-white hover:bg-[#b842e3]">
                 Login

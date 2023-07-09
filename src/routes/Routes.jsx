@@ -12,6 +12,7 @@ import AllProducts from "../pages/Dashboard/AllProducts/AllProducts";
 import Customers from "../pages/Dashboard/Customers/Customers";
 import Orders from "../pages/Dashboard/Orders/Orders";
 import AdminHome from "../pages/Dashboard/AdminHome/AdminHome";
+import ErrorPage from "../pages/ErrorPage/ErrorPage";
 
 const router = createBrowserRouter([
   {
@@ -71,6 +72,10 @@ const router = createBrowserRouter([
         element: <AdminHome></AdminHome>
       }
     ]
+  },
+  {
+    path:"*",
+    element:<ErrorPage></ErrorPage>
   }
 ]);
 

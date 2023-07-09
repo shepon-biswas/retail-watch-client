@@ -1,10 +1,12 @@
+import { Link } from "react-router-dom";
+
 const ProductCard = ({ productInfo }) => {
   console.log(productInfo);
   const { _id, name, image, price, model } = productInfo;
   return (
     <>
       <div>
-        <div className="card card-compact w-96 bg-base-100 shadow-xl">
+        <div className="card card-compact w-full bg-base-100 shadow-xl">
           <figure>
             <img src={image} alt="Product Image" />
           </figure>
@@ -17,7 +19,7 @@ const ProductCard = ({ productInfo }) => {
               <span className="px-3 py-1 bg-[#9336B4] text-white rounded"> Model:  {model}</span>
             </div>
             <div className="card-actions justify-end">
-              <button className="btn btn-block bg-[#9336B4] hover:bg-[#d25bfd] text-white">View Details</button>
+              <Link to={`/product-details/${_id}`} className="btn btn-block bg-[#9336B4] hover:bg-[#d25bfd] text-white">View Details</Link>
             </div>
           </div>
         </div>

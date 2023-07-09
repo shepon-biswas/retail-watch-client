@@ -8,7 +8,7 @@ const useCart = () => {
     const {data: cart = [], isLoading: cartLoading, refetch} = useQuery({
         queryKey: ['products', user?.email],
         queryFn: async() => {
-            const res = await fetch(`http://localhost:5000/carts?email=${user?.email}`);
+            const res = await fetch(`https://retail-watch-server.vercel.app/carts?email=${user?.email}`);
             return res.json();
         }
     })

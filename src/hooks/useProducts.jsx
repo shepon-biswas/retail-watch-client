@@ -5,7 +5,7 @@ const useProducts = () => {
     const {data: products = [], isLoading: productsLoading, refetch} = useQuery({
         queryKey: ['products'],
         queryFn: async() => {
-            const res = await fetch('http://localhost:5000/products');
+            const res = await fetch('https://retail-watch-server.vercel.app/products');
             return res.json();
         }
     })

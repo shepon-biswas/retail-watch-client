@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../../../providers/AuthProvider";
-import { FaShoppingCart } from "react-icons/fa";
+import { FaShoppingCart, FaTh } from "react-icons/fa";
 import useCart from "../../../hooks/useCart";
 
 const Header = () => {
@@ -67,6 +67,11 @@ const Header = () => {
             </ul>
           </div>
           <div className="navbar-end space-x-3">
+            {
+              user && (<>
+              <Link className="uppercase font-semibold inline-flex items-center gap-1" to={"/dashboard/home"}> <FaTh></FaTh> Dashboard</Link>
+              </>)
+            }
             <Link to={"/cart"}>
               <div className="indicator me-2">
                 <FaShoppingCart className="w-6 h-6  "></FaShoppingCart>

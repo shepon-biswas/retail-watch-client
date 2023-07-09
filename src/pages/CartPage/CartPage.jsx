@@ -45,7 +45,8 @@ const handleDeleteItem = item =>{
             <h2 className="text-2xl font-bold text-center my-14">Your Cart Summary</h2>
         </div>
         <div className="grid md:grid-cols-6 gap-5">
-          <div className="col-span-4"><table className="table">
+          <div className="col-span-4">
+            <table className="table">
             {/* head */}
             <thead className="font-bold text-base text-center">
               <tr>
@@ -96,7 +97,8 @@ const handleDeleteItem = item =>{
                 </tr>
               ))}
             </tbody>
-          </table></div>
+          </table>
+          </div>
           <div className="col-span-2 p-3 rounded-md text-center bg-[#f5d9ff] flex flex-col ">
             <h2 className="text-xl font-bold">Total Quantity: {cart.length}</h2>
             <h2 className="text-xl font-bold">Total Price: ৳{totalPrice}</h2>

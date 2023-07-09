@@ -7,6 +7,11 @@ import Register from "../pages/Register/Register";
 import ProductDetails from "../pages/ProductDetails/ProductDetails";
 import CartPage from "../pages/CartPage/CartPage";
 import ThankYou from "../pages/ThankYou/ThankYou";
+import Dashboard from "../layouts/Dashboard";
+import AllProducts from "../pages/Dashboard/AllProducts/AllProducts";
+import Customers from "../pages/Dashboard/Customers/Customers";
+import Orders from "../pages/Dashboard/Orders/Orders";
+import AdminHome from "../pages/Dashboard/AdminHome/AdminHome";
 
 const router = createBrowserRouter([
   {
@@ -45,6 +50,28 @@ const router = createBrowserRouter([
       }
     ],
   },
+  {
+    path:"dashboard",
+    element: <Dashboard></Dashboard>,
+    children:[
+      {
+        path: "all-products",
+        element: <AllProducts></AllProducts>
+      },
+      {
+        path: "customers",
+        element: <Customers></Customers>
+      },
+      {
+        path: "orders",
+        element: <Orders></Orders>
+      },
+      {
+        path:"home",
+        element: <AdminHome></AdminHome>
+      }
+    ]
+  }
 ]);
 
 export default router;

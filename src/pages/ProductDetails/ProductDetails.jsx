@@ -39,7 +39,7 @@ const ProductDetails = () => {
         .then((res) => res.json())
         .then((data) => {
           if (data.insertedId) {
-            refetch();
+            refetch;
             Swal.fire({
               position: "top-end",
               icon: "success",
